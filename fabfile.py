@@ -15,7 +15,7 @@ def push():
     local("git push")
 
 def run_app():
-    run("fig up -d")
+    run("fig -f fig-production.yml up -d" )
 
 def deploy():
     push()

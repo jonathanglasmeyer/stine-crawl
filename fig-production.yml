@@ -1,0 +1,9 @@
+main:
+  build: .
+  volumes:
+    - app:/app/src
+  ports:
+    - "80"
+  environment:
+    VIRTUAL_HOST: stundenplan.jonathanwerner.net
+  command: python src/server.py
