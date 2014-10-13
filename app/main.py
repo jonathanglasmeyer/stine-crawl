@@ -2,13 +2,16 @@ from flask import *
 import markdown
 from subprocess import call
 import subprocess
-from extract import extract
 from datetime import datetime
-app = Flask(__name__)
+import os
 
+from extract import extract
+app = Flask(__name__)
+wd = os.path.dirname(os.path.realpath(__file__))
 dateformat = '%d.%m.%Y'
 def get_event_list(username, password):
-    html_raw = subprocess.check_output(['coffee', 'crawl.coffee', username, password])
+    html_raw = subprocess.check_output(
+            ['coffee', os.path.join(wd,'crawl.coffee'), username, password])
     days = extract(html_raw)
     content = "### Events\n\n"
     for date, events in days:
@@ -25,12 +28,15 @@ def get_event_list(username, password):
     return content.decode('utf8', 'replace')
 
 @app.route("/")
-def hello():
+def main():
     username = request.args.get('username')
     password = request.args.get('password')
     content = Markup(markdown.markdown(get_event_list(username, password)))
     return render_template('index.html', **locals())
 
+@app.route("/hello")
+def hello():
+    return 'heshoetnllo'
 
 if __name__ == "__main__":
     app.run()
