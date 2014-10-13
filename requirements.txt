@@ -1,0 +1,10 @@
+Flask==0.10.1
+Jinja2==2.7.3
+Markdown==2.5.1
+MarkupSafe==0.23
+Werkzeug==0.9.6
+backports.ssl-match-hostname==3.4.0.2
+beautifulsoup4==4.3.2
+certifi==14.05.14
+itsdangerous==0.24
+wsgiref==0.1.2
